@@ -1,0 +1,72 @@
+
+service: bookshop-appointment
+# app and org for use with dashboard.serverless.com
+app: bookshopmanager
+org: sangphan45
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java8
+  httpApi:
+    cors: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource:
+          - { "Fn::GetAtt": [ "appointment", "Arn" ] }
+plugins:
+  - serverless-offline
+package:
+  artifact: build/distributions/hello.zip
+
+functions:
+  hello:
+    handler: com.serverless.Handler
+  createAppointment:
+    handler: com.serverless.CreateAppointmentHandler
+    events:
+      - http:
+          path: /appointment
+          method: post
+  getAppointment:
+    handler: com.serverless.GetAppointmentHandler
+    events:
+      - http:
+          path: /appointment
+          method: get
+  deleteAppointment:
+    handler: com.serverless.DeleteAppointmentHandler
+    events:
+      - http:
+          path: /appointment/{id}
+          method: delete
+  updateAppointment:
+    handler: com.serverless.UpdateAppointmentHandler
+    events:
+      - http:
+          path: /appointment
+          method: put
+
+resources:
+  Resources:
+    appointment:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: Bookshop-Appointments
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

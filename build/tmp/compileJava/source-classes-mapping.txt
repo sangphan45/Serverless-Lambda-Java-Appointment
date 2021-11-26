@@ -1,0 +1,23 @@
+com/serverless/DeleteAppointmentHandler.java
+ com.serverless.DeleteAppointmentHandler
+com/serverless/CreateAppointmentHandler.java
+ com.serverless.CreateAppointmentHandler
+connection/DynamoDBAdapter.java
+ connection.DynamoDBAdapter
+com/serverless/ApiGatewayRequest.java
+ com.serverless.ApiGatewayRequest
+com/serverless/appointmentdao.java
+ com.serverless.appointmentdao
+com/serverless/GetAppointmentHandler.java
+ com.serverless.GetAppointmentHandler
+com/serverless/UpdateAppointmentHandler.java
+ com.serverless.UpdateAppointmentHandler
+com/serverless/ApiGatewayResponse.java
+ com.serverless.ApiGatewayResponse
+ com.serverless.ApiGatewayResponse$Builder
+com/serverless/Handler.java
+ com.serverless.Handler
+com/serverless/Response.java
+ com.serverless.Response
+com/serverless/appointmentmodel.java
+ com.serverless.appointmentmodel
